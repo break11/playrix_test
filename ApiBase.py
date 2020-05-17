@@ -1,0 +1,6 @@
+token      = "20a93140dee470ec970b7a528988fd7cb3c55520"
+userName   = "break11"
+repoName   = "playrix_test"
+branchName = "master"
+dateStart  = "17.09.2001"
+dateStop   = "10.10.2021"
