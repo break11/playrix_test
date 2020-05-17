@@ -6,11 +6,11 @@
 # ветке.
 
 import requests
-import json
 
 import ApiBase
 
-url = f"https://api.github.com/repos/{ApiBase.userName}/{ApiBase.repoName}/commits?since={ApiBase.dateStart}&until={ApiBase.dateStop}&sha={ApiBase.branchName}"
+url = f"https://api.github.com/repos/{ApiBase.userName}/{ApiBase.repoName}/" +\
+      f"commits?since={ApiBase.dateStart}&until={ApiBase.dateStop}&sha={ApiBase.branchName}"
 
 payload = {}
 headers = {
@@ -20,14 +20,11 @@ headers = {
 
 response = requests.request("GET", url, headers=headers, data = payload)
 
-responseList = json.loads( response.text )
-
-
 resultDict = {}
 # У айметов есть поле author - это JSON, в нём есть поле login
 # Нужно посчитать количество коммитов для каждого login и отсортировать по убыванию
 
-for item in responseList:
+for item in response.json():
   commitAuthorName = item["author"]["login"]
   if resultDict.get( commitAuthorName ):
     resultDict[ commitAuthorName ] += 1
